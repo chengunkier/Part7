@@ -7,8 +7,7 @@ import CreateNew from './components/CreateNew'
 import { useAnecdotes } from './hooks'
 
 const App = () => {
-  const { anecdotes } = useAnecdotes()
-  const addAnecdote = () => {} // dummy for now, wired up properly in the next exercise
+  const { anecdotes, addAnecdote } = useAnecdotes()
 
   return (
     <Router>
