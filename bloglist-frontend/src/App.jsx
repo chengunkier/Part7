@@ -1,23 +1,37 @@
 import { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate
+} from 'react-router-dom'
+
 import Notification from './components/Notification'
 import SingleBlog from './components/SingleBlog'
 import CreateBlog from './components/CreateBlog'
 import ErrorBoundary from './components/ErrorBoundary'
+
 import blogService from './services/blogs'
 import loginService from './services/login'
 
 const Navigation = ({ user, handleLogout }) => {
   return (
     <nav>
-      <Link to="/" className="nav-brand">Blog App</Link>
+      <Link to="/" className="nav-brand">
+        Blog App
+      </Link>
+
       <div className="nav-links">
         <Link to="/">blogs</Link>
+
         {user && <Link to="/create">new blog</Link>}
-        {user
-          ? <button onClick={handleLogout}>logout</button>
-          : <Link to="/login">login</Link>
-        }
+
+        {user ? (
+          <button onClick={handleLogout}>logout</button>
+        ) : (
+          <Link to="/login">login</Link>
+        )}
       </div>
     </nav>
   )
@@ -37,6 +51,7 @@ const LoginForm = ({
       <form onSubmit={handleLogin}>
         <div className="form-group">
           <label>username</label>
+
           <input
             type="text"
             value={username}
@@ -47,6 +62,7 @@ const LoginForm = ({
 
         <div className="form-group">
           <label>password</label>
+
           <input
             type="password"
             value={password}
@@ -62,25 +78,27 @@ const LoginForm = ({
 }
 
 const BlogList = ({ blogs }) => {
-  throw new Error('simulated error')
-
   return (
     <div>
       <h2>blogs</h2>
+
       <ul>
         {[...blogs]
           .sort((a, b) => b.likes - a.likes)
-          .map(blog =>
+          .map(blog => (
             <li key={blog.id}>
               <Link to={`/blogs/${blog.id}`}>
                 {blog.title} by {blog.author}
               </Link>
             </li>
-          )
-        }
+          ))}
       </ul>
     </div>
   )
+}
+
+const NotFound = () => {
+  return <h1>404 – Page not found</h1>
 }
 
 const AppContent = () => {
@@ -100,7 +118,9 @@ const AppContent = () => {
   }, [])
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+    const loggedUserJSON = window.localStorage.getItem(
+      'loggedBlogappUser'
+    )
 
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
@@ -136,9 +156,11 @@ const AppContent = () => {
       )
 
       blogService.setToken(user.token)
+
       setUser(user)
       setUsername('')
       setPassword('')
+
       navigate('/')
     } catch (exception) {
       showNotification('wrong username or password', 'error')
@@ -147,8 +169,11 @@ const AppContent = () => {
 
   const handleLogout = () => {
     window.localStorage.removeItem('loggedBlogappUser')
+
     blogService.setToken(null)
+
     setUser(null)
+
     navigate('/')
   }
 
@@ -194,7 +219,10 @@ const AppContent = () => {
 
       setBlogs(blogs.filter(blog => blog.id !== id))
 
-      showNotification('blog removed successfully', 'success')
+      showNotification(
+        'blog removed successfully',
+        'success'
+      )
 
       navigate('/')
     } catch (exception) {
@@ -254,6 +282,11 @@ const AppContent = () => {
                   setPassword={setPassword}
                 />
               }
+            />
+
+            <Route
+              path="*"
+              element={<NotFound />}
             />
           </Routes>
         </ErrorBoundary>
