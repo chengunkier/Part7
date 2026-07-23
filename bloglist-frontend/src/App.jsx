@@ -85,7 +85,7 @@ const BlogList = ({ blogs }) => {
       <ul>
         {[...blogs]
           .sort((a, b) => b.likes - a.likes)
-          .map(blog => (
+          .map((blog) => (
             <li key={blog.id}>
               <Link to={`/blogs/${blog.id}`}>
                 {blog.title} by {blog.author}
@@ -114,13 +114,11 @@ const AppContent = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    blogService.getAll().then(blogs => setBlogs(blogs))
+    blogService.getAll().then((blogs) => setBlogs(blogs))
   }, [])
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem(
-      'loggedBlogappUser'
-    )
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
 
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
@@ -141,7 +139,7 @@ const AppContent = () => {
     }, 5000)
   }
 
-  const handleLogin = async event => {
+  const handleLogin = async (event) => {
     event.preventDefault()
 
     try {
@@ -150,10 +148,7 @@ const AppContent = () => {
         password
       })
 
-      window.localStorage.setItem(
-        'loggedBlogappUser',
-        JSON.stringify(user)
-      )
+      window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
 
       blogService.setToken(user.token)
 
@@ -177,7 +172,7 @@ const AppContent = () => {
     navigate('/')
   }
 
-  const createBlog = async blogObject => {
+  const createBlog = async (blogObject) => {
     try {
       const newBlog = await blogService.create(blogObject)
 
@@ -194,15 +189,12 @@ const AppContent = () => {
     }
   }
 
-  const handleLike = async updatedBlog => {
+  const handleLike = async (updatedBlog) => {
     try {
-      const returnedBlog = await blogService.update(
-        updatedBlog.id,
-        updatedBlog
-      )
+      const returnedBlog = await blogService.update(updatedBlog.id, updatedBlog)
 
       setBlogs(
-        blogs.map(blog =>
+        blogs.map((blog) =>
           blog.id === returnedBlog.id
             ? { ...returnedBlog, user: blog.user }
             : blog
@@ -213,16 +205,13 @@ const AppContent = () => {
     }
   }
 
-  const handleDelete = async id => {
+  const handleDelete = async (id) => {
     try {
       await blogService.remove(id)
 
-      setBlogs(blogs.filter(blog => blog.id !== id))
+      setBlogs(blogs.filter((blog) => blog.id !== id))
 
-      showNotification(
-        'blog removed successfully',
-        'success'
-      )
+      showNotification('blog removed successfully', 'success')
 
       navigate('/')
     } catch (exception) {
@@ -232,23 +221,14 @@ const AppContent = () => {
 
   return (
     <div>
-      <Navigation
-        user={user}
-        handleLogout={handleLogout}
-      />
+      <Navigation user={user} handleLogout={handleLogout} />
 
       <div className="content">
-        <Notification
-          message={notification.message}
-          type={notification.type}
-        />
+        <Notification message={notification.message} type={notification.type} />
 
         <ErrorBoundary>
           <Routes>
-            <Route
-              path="/"
-              element={<BlogList blogs={blogs} />}
-            />
+            <Route path="/" element={<BlogList blogs={blogs} />} />
 
             <Route
               path="/blogs/:id"
@@ -264,11 +244,7 @@ const AppContent = () => {
 
             <Route
               path="/create"
-              element={
-                <CreateBlog
-                  createBlog={createBlog}
-                />
-              }
+              element={<CreateBlog createBlog={createBlog} />}
             />
 
             <Route
@@ -284,10 +260,7 @@ const AppContent = () => {
               }
             />
 
-            <Route
-              path="*"
-              element={<NotFound />}
-            />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </ErrorBoundary>
       </div>

@@ -49,7 +49,11 @@ test('unauthenticated users see blog info and likes but no buttons', () => {
   renderSingleBlog(null)
 
   expect(screen.getByText('The Single Responsibility Principle')).toBeDefined()
-  expect(screen.getByText('https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html')).toBeDefined()
+  expect(
+    screen.getByText(
+      'https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html'
+    )
+  ).toBeDefined()
   expect(screen.getByText('0 likes')).toBeDefined()
   expect(screen.getByText('Added by Matti Luukkainen')).toBeDefined()
 
