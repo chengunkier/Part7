@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import useBlogStore from '../stores/blogStore'
 import useNotificationStore from '../stores/notificationStore'
+import useField from '../hooks/useField'
 
 const SingleBlog = ({ user }) => {
   const { id } = useParams()
@@ -9,7 +10,11 @@ const SingleBlog = ({ user }) => {
   const blogs = useBlogStore(state => state.blogs)
   const likeBlog = useBlogStore(state => state.likeBlog)
   const deleteBlog = useBlogStore(state => state.deleteBlog)
+  const addComment = useBlogStore(state => state.addComment)
   const showNotification = useNotificationStore(state => state.showNotification)
+
+  const comment = useField('text')
+  const { reset: resetComment, ...commentProps } = comment
 
   const blog = blogs.find(b => b.id === id)
 
@@ -39,6 +44,16 @@ const SingleBlog = ({ user }) => {
     }
   }
 
+  const handleComment = async (event) => {
+    event.preventDefault()
+    try {
+      await addComment(blog.id, comment.value)
+      resetComment()
+    } catch (exception) {
+      showNotification('adding comment failed', 'error')
+    }
+  }
+
   const showDeleteButton = user && blog.user && user.username === blog.user.username
 
   return (
@@ -55,6 +70,19 @@ const SingleBlog = ({ user }) => {
         {showDeleteButton && (
           <button className="btn-remove" onClick={handleDelete}>remove</button>
         )}
+      </div>
+
+      <div className="comments-section">
+        <h3>comments</h3>
+        <form onSubmit={handleComment}>
+          <input {...commentProps} placeholder="write a comment" />
+          <button type="submit">add comment</button>
+        </form>
+        <ul>
+          {blog.comments && blog.comments.map((c, index) => (
+            <li key={index}>{c}</li>
+          ))}
+        </ul>
       </div>
     </div>
   )

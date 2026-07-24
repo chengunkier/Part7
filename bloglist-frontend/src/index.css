@@ -301,6 +301,60 @@ nav {
   background-color: #ffebee;
 }
 
+.comments-section {
+  margin-top: 30px;
+}
+
+.comments-section h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.comments-section form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.comments-section form input {
+  flex: 1;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.comments-section form input:focus {
+  border-color: #1565c0;
+}
+
+.comments-section form button {
+  background-color: #1565c0;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.comments-section form button:hover {
+  background-color: #0d47a1;
+}
+
+.comments-section ul {
+  padding-left: 20px;
+}
+
+.comments-section ul li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #333;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
