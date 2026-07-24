@@ -75,7 +75,10 @@ const SingleBlog = ({ user }) => {
       <div className="comments-section">
         <h3>comments</h3>
         <form onSubmit={handleComment}>
-          <input {...commentProps} placeholder="write a comment" />
+          <input
+            {...commentProps}
+            placeholder="add a comment"
+          />
           <button type="submit">add comment</button>
         </form>
         <ul>

@@ -306,39 +306,45 @@ nav {
 }
 
 .comments-section h3 {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: normal;
+  margin-bottom: 16px;
 }
 
 .comments-section form {
   display: flex;
-  gap: 10px;
+  gap: 0;
   margin-bottom: 16px;
 }
 
 .comments-section form input {
   flex: 1;
   border: 1px solid #ccc;
-  padding: 8px 12px;
+  border-right: none;
+  padding: 12px 16px;
   font-size: 14px;
-  border-radius: 4px;
+  border-radius: 4px 0 0 4px;
   outline: none;
+  color: #aaa;
 }
 
 .comments-section form input:focus {
   border-color: #1565c0;
+  color: #333;
 }
 
 .comments-section form button {
   background-color: #1565c0;
   color: white;
   border: none;
-  padding: 8px 16px;
+  padding: 12px 20px;
   font-size: 14px;
   font-weight: bold;
-  border-radius: 4px;
+  border-radius: 0 4px 4px 0;
   cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
 }
 
 .comments-section form button:hover {
@@ -347,6 +353,7 @@ nav {
 
 .comments-section ul {
   padding-left: 20px;
+  margin-top: 12px;
 }
 
 .comments-section ul li {
