@@ -1,17 +1,25 @@
-import { useState } from 'react'
+import useField from '../hooks/useField'
 
 const CreateBlog = ({ createBlog }) => {
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+  const title = useField('text')
+  const author = useField('text')
+  const url = useField('text')
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    createBlog({ title, author, url })
-    setTitle('')
-    setAuthor('')
-    setUrl('')
+    createBlog({
+      title: title.value,
+      author: author.value,
+      url: url.value
+    })
+    title.reset()
+    author.reset()
+    url.reset()
   }
+
+  const { reset: resetTitle, ...titleProps } = title
+  const { reset: resetAuthor, ...authorProps } = author
+  const { reset: resetUrl, ...urlProps } = url
 
   return (
     <div className="create-form">
@@ -19,33 +27,15 @@ const CreateBlog = ({ createBlog }) => {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>title:</label>
-          <input
-            type="text"
-            value={title}
-            name="Title"
-            placeholder="title"
-            onChange={({ target }) => setTitle(target.value)}
-          />
+          <input {...titleProps} name="Title" placeholder="title" />
         </div>
         <div className="form-group">
           <label>author:</label>
-          <input
-            type="text"
-            value={author}
-            name="Author"
-            placeholder="author"
-            onChange={({ target }) => setAuthor(target.value)}
-          />
+          <input {...authorProps} name="Author" placeholder="author" />
         </div>
         <div className="form-group">
           <label>url:</label>
-          <input
-            type="text"
-            value={url}
-            name="Url"
-            placeholder="url"
-            onChange={({ target }) => setUrl(target.value)}
-          />
+          <input {...urlProps} name="Url" placeholder="url" />
         </div>
         <button type="submit">create</button>
       </form>

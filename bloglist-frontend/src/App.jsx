@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
 import Notification from './components/Notification'
 import SingleBlog from './components/SingleBlog'
@@ -6,6 +6,7 @@ import CreateBlog from './components/CreateBlog'
 import useNotificationStore from './stores/notificationStore'
 import useBlogStore from './stores/blogStore'
 import useUserStore from './stores/userStore'
+import useField from './hooks/useField'
 
 const Navigation = ({ user, handleLogout }) => {
   return (
@@ -24,8 +25,8 @@ const Navigation = ({ user, handleLogout }) => {
 }
 
 const LoginForm = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const username = useField('text')
+  const password = useField('password')
 
   const loginUser = useUserStore(state => state.loginUser)
   const showNotification = useNotificationStore(state => state.showNotification)
@@ -36,14 +37,17 @@ const LoginForm = () => {
     event.preventDefault()
 
     try {
-      await loginUser(username, password)
-      setUsername('')
-      setPassword('')
+      await loginUser(username.value, password.value)
+      username.reset()
+      password.reset()
       navigate('/')
     } catch (exception) {
       showNotification('wrong username or password', 'error')
     }
   }
+
+  const { reset: resetUsername, ...usernameProps } = username
+  const { reset: resetPassword, ...passwordProps } = password
 
   return (
     <div className="login-form">
@@ -51,21 +55,11 @@ const LoginForm = () => {
       <form onSubmit={handleLogin}>
         <div className="form-group">
           <label>username</label>
-          <input
-            type="text"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
-          />
+          <input {...usernameProps} name="Username" />
         </div>
         <div className="form-group">
           <label>password</label>
-          <input
-            type="password"
-            value={password}
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
+          <input {...passwordProps} name="Password" />
         </div>
         <button type="submit">login</button>
       </form>
