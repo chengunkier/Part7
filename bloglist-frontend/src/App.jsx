@@ -6,6 +6,7 @@ import CreateBlog from './components/CreateBlog'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import useNotificationStore from './stores/notificationStore'
+import useBlogStore from './stores/blogStore'
 
 const Navigation = ({ user, handleLogout }) => {
   return (
@@ -73,17 +74,21 @@ const BlogList = ({ blogs }) => {
 }
 
 const AppContent = () => {
-  const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
 
   const showNotification = useNotificationStore(state => state.showNotification)
+  const blogs = useBlogStore(state => state.blogs)
+  const initializeBlogs = useBlogStore(state => state.initializeBlogs)
+  const createBlogStore = useBlogStore(state => state.createBlog)
+  const likeBlog = useBlogStore(state => state.likeBlog)
+  const deleteBlog = useBlogStore(state => state.deleteBlog)
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    blogService.getAll().then(blogs => setBlogs(blogs))
+    initializeBlogs()
   }, [])
 
   useEffect(() => {
@@ -124,8 +129,7 @@ const AppContent = () => {
 
   const createBlog = async (blogObject) => {
     try {
-      const newBlog = await blogService.create(blogObject)
-      setBlogs(blogs.concat(newBlog))
+      const newBlog = await createBlogStore(blogObject)
       showNotification(
         `a new blog ${newBlog.title} by ${newBlog.author} added`,
         'success'
@@ -138,12 +142,7 @@ const AppContent = () => {
 
   const handleLike = async (updatedBlog) => {
     try {
-      const returnedBlog = await blogService.update(updatedBlog.id, updatedBlog)
-      setBlogs(blogs.map(blog =>
-        blog.id === returnedBlog.id
-          ? { ...returnedBlog, user: blog.user }
-          : blog
-      ))
+      await likeBlog(updatedBlog)
     } catch (exception) {
       showNotification('liking blog failed', 'error')
     }
@@ -151,8 +150,7 @@ const AppContent = () => {
 
   const handleDelete = async (id) => {
     try {
-      await blogService.remove(id)
-      setBlogs(blogs.filter(blog => blog.id !== id))
+      await deleteBlog(id)
       showNotification('blog removed successfully', 'success')
       navigate('/')
     } catch (exception) {
