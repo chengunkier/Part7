@@ -82,8 +82,6 @@ const AppContent = () => {
   const blogs = useBlogStore(state => state.blogs)
   const initializeBlogs = useBlogStore(state => state.initializeBlogs)
   const createBlogStore = useBlogStore(state => state.createBlog)
-  const likeBlog = useBlogStore(state => state.likeBlog)
-  const deleteBlog = useBlogStore(state => state.deleteBlog)
 
   const navigate = useNavigate()
 
@@ -140,24 +138,6 @@ const AppContent = () => {
     }
   }
 
-  const handleLike = async (updatedBlog) => {
-    try {
-      await likeBlog(updatedBlog)
-    } catch (exception) {
-      showNotification('liking blog failed', 'error')
-    }
-  }
-
-  const handleDelete = async (id) => {
-    try {
-      await deleteBlog(id)
-      showNotification('blog removed successfully', 'success')
-      navigate('/')
-    } catch (exception) {
-      showNotification('removing blog failed', 'error')
-    }
-  }
-
   return (
     <div>
       <Navigation user={user} handleLogout={handleLogout} />
@@ -170,14 +150,7 @@ const AppContent = () => {
           />
           <Route
             path="/blogs/:id"
-            element={
-              <SingleBlog
-                blogs={blogs}
-                user={user}
-                handleLike={handleLike}
-                handleDelete={handleDelete}
-              />
-            }
+            element={<SingleBlog user={user} />}
           />
           <Route
             path="/create"
