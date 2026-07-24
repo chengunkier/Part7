@@ -57,6 +57,8 @@ nav {
 
 .content {
   padding: 0 24px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .notification {
@@ -110,73 +112,94 @@ nav {
 }
 
 .login-form {
-  max-width: 300px;
-  margin-top: 20px;
+  max-width: 360px;
+  margin: 40px auto;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .login-form h2 {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
+  text-align: center;
+  color: #1565c0;
 }
 
 .login-form .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.login-form .form-group label {
+  display: block;
+  color: #555;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .login-form .form-group input {
   display: block;
   width: 100%;
-  border: none;
-  border-bottom: 2px solid #ccc;
-  padding: 8px 0;
-  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 15px;
   outline: none;
-  background: transparent;
+  background: #fafafa;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
 }
 
 .login-form .form-group input:focus {
-  border-bottom: 2px solid #4285f4;
-}
-
-.login-form .form-group label {
-  display: block;
-  color: #888;
-  font-size: 14px;
-  margin-bottom: 4px;
+  border-color: #1565c0;
+  background: white;
 }
 
 .login-form button {
-  margin-top: 20px;
-  background-color: #4285f4;
+  margin-top: 12px;
+  width: 100%;
+  background-color: #1565c0;
   color: white;
   border: none;
   padding: 12px 30px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 1px;
+  transition: background-color 0.2s;
 }
 
 .login-form button:hover {
-  background-color: #3367d6;
+  background-color: #0d47a1;
 }
 
 .create-form {
-  max-width: 350px;
-  margin-top: 20px;
+  max-width: 480px;
+  margin: 20px auto;
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .create-form h2 {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  color: #1565c0;
 }
 
 .create-form .form-group {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .create-form .form-group label {
@@ -186,54 +209,60 @@ nav {
 .create-form .form-group input {
   width: 100%;
   border: 1px solid #ccc;
-  padding: 10px 12px;
+  padding: 10px 14px;
   font-size: 14px;
-  border-radius: 4px;
+  border-radius: 6px;
   outline: none;
   box-sizing: border-box;
+  background: #fafafa;
+  transition: border-color 0.2s;
 }
 
 .create-form .form-group input:focus {
-  border-color: #4285f4;
+  border-color: #1565c0;
+  background: white;
 }
 
 .create-form button {
-  margin-top: 10px;
-  background-color: #4285f4;
+  margin-top: 8px;
+  width: 100%;
+  background-color: #1565c0;
   color: white;
   border: none;
   padding: 12px 30px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 1px;
+  transition: background-color 0.2s;
 }
 
 .create-form button:hover {
-  background-color: #3367d6;
+  background-color: #0d47a1;
 }
 
 .single-blog {
   background-color: white;
   border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 30px;
-  max-width: 600px;
-  margin-top: 20px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 36px;
+  max-width: 680px;
+  margin: 24px auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .single-blog-title {
   font-size: 28px;
   font-weight: bold;
   margin: 0 0 8px 0;
+  color: #1a1a1a;
 }
 
 .single-blog-author {
   font-size: 16px;
-  color: #333;
+  color: #555;
   margin: 0 0 12px 0;
 }
 
@@ -241,8 +270,9 @@ nav {
   display: block;
   color: #1565c0;
   font-size: 14px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   text-decoration: none;
+  word-break: break-all;
 }
 
 .single-blog-url:hover {
@@ -250,8 +280,8 @@ nav {
 }
 
 .single-blog-added {
-  font-size: 14px;
-  color: #555;
+  font-size: 13px;
+  color: #888;
   margin: 0 0 20px 0;
 }
 
@@ -259,92 +289,104 @@ nav {
   display: flex;
   align-items: center;
   gap: 12px;
+  padding: 16px 0;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 24px;
 }
 
 .single-blog-likes {
   font-size: 16px;
   font-weight: bold;
   color: #333;
+  margin-right: 4px;
 }
 
 .btn-like {
   background: white;
   color: #1565c0;
   border: 2px solid #1565c0;
-  padding: 6px 16px;
-  font-size: 14px;
+  padding: 6px 18px;
+  font-size: 13px;
   font-weight: bold;
-  border-radius: 4px;
+  border-radius: 20px;
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 1px;
+  transition: all 0.2s;
 }
 
 .btn-like:hover {
-  background-color: #e3f2fd;
+  background-color: #1565c0;
+  color: white;
 }
 
 .btn-remove {
   background: white;
   color: #c62828;
   border: 2px solid #c62828;
-  padding: 6px 16px;
-  font-size: 14px;
+  padding: 6px 18px;
+  font-size: 13px;
   font-weight: bold;
-  border-radius: 4px;
+  border-radius: 20px;
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 1px;
+  transition: all 0.2s;
 }
 
 .btn-remove:hover {
-  background-color: #ffebee;
+  background-color: #c62828;
+  color: white;
 }
 
 .comments-section {
-  margin-top: 30px;
+  margin-top: 8px;
 }
 
 .comments-section h3 {
   font-size: 18px;
-  font-weight: normal;
+  font-weight: bold;
   margin-bottom: 16px;
+  color: #333;
 }
 
 .comments-section form {
   display: flex;
   gap: 0;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .comments-section form input {
   flex: 1;
   border: 1px solid #ccc;
   border-right: none;
-  padding: 12px 16px;
+  padding: 10px 16px;
   font-size: 14px;
-  border-radius: 4px 0 0 4px;
+  border-radius: 6px 0 0 6px;
   outline: none;
-  color: #aaa;
+  background: #fafafa;
+  transition: border-color 0.2s;
 }
 
 .comments-section form input:focus {
   border-color: #1565c0;
-  color: #333;
+  background: white;
 }
 
 .comments-section form button {
   background-color: #1565c0;
   color: white;
   border: none;
-  padding: 12px 20px;
-  font-size: 14px;
+  padding: 10px 20px;
+  font-size: 13px;
   font-weight: bold;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 6px 6px 0;
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 1px;
   white-space: nowrap;
+  transition: background-color 0.2s;
 }
 
 .comments-section form button:hover {
@@ -353,38 +395,140 @@ nav {
 
 .comments-section ul {
   padding-left: 20px;
-  margin-top: 12px;
+  margin-top: 8px;
 }
 
 .comments-section ul li {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #444;
+  padding: 8px 12px;
+  background: #f8f8f8;
+  border-radius: 6px;
+  list-style: disc;
+}
+
+.users-page h2 {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  color: #1a1a1a;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.users-table th {
+  text-align: left;
+  padding: 14px 20px;
+  background: #f5f7fa;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #555;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.users-table td {
+  padding: 14px 20px;
+  border-bottom: 1px solid #f0f0f0;
   font-size: 14px;
   color: #333;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+.users-table tr:last-child td {
+  border-bottom: none;
 }
 
-table th {
-  text-align: left;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e0e0e0;
+.users-table tr:hover td {
+  background: #f9fbff;
 }
 
-table td {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-right: 60px;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-table a {
+.users-table a {
   color: #1565c0;
   text-decoration: none;
+  font-weight: 500;
 }
 
-table a:hover {
+.users-table a:hover {
+  text-decoration: underline;
+}
+
+.user-view {
+  max-width: 600px;
+  margin: 24px auto;
+}
+
+.user-view h2 {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #1a1a1a;
+}
+
+.user-view h3 {
+  font-size: 15px;
+  color: #888;
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+.user-view ul {
+  padding-left: 20px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  padding: 20px 20px 20px 40px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.user-view ul li {
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #333;
+}
+
+.blog-list h2 {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #1a1a1a;
+}
+
+.blog-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.blog-list ul li {
+  padding: 14px 20px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: box-shadow 0.2s;
+}
+
+.blog-list ul li:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.blog-list ul li a {
+  color: #1565c0;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.blog-list ul li a:hover {
   text-decoration: underline;
 }

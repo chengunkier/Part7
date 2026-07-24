@@ -58,11 +58,11 @@ const LoginForm = () => {
       <form onSubmit={handleLogin}>
         <div className="form-group">
           <label>username</label>
-          <input {...usernameProps} name="Username" />
+          <input {...usernameProps} name="Username" placeholder="enter username" />
         </div>
         <div className="form-group">
           <label>password</label>
-          <input {...passwordProps} name="Password" />
+          <input {...passwordProps} name="Password" placeholder="enter password" />
         </div>
         <button type="submit">login</button>
       </form>
@@ -72,7 +72,7 @@ const LoginForm = () => {
 
 const BlogList = ({ blogs }) => {
   return (
-    <div>
+    <div className="blog-list">
       <h2>blogs</h2>
       <ul>
         {[...blogs]
@@ -133,30 +133,12 @@ const AppContent = () => {
       <div className="content">
         <Notification />
         <Routes>
-          <Route
-            path="/"
-            element={<BlogList blogs={blogs} />}
-          />
-          <Route
-            path="/blogs/:id"
-            element={<SingleBlog user={user} />}
-          />
-          <Route
-            path="/users"
-            element={<Users />}
-          />
-          <Route
-            path="/users/:id"
-            element={<UserView />}
-          />
-          <Route
-            path="/create"
-            element={<CreateBlog createBlog={createBlog} />}
-          />
-          <Route
-            path="/login"
-            element={<LoginForm />}
-          />
+          <Route path="/" element={<BlogList blogs={blogs} />} />
+          <Route path="/blogs/:id" element={<SingleBlog user={user} />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/users/:id" element={<UserView />} />
+          <Route path="/create" element={<CreateBlog createBlog={createBlog} />} />
+          <Route path="/login" element={<LoginForm />} />
         </Routes>
       </div>
     </div>

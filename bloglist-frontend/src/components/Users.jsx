@@ -10,26 +10,22 @@ const Users = () => {
   }, [])
 
   return (
-    <div>
+    <div className="users-page">
       <h2>Users</h2>
-      <table>
+      <table className="users-table">
         <tbody>
           <tr>
-            <th style={{ textAlign: 'left', paddingBottom: '10px' }}>Name</th>
-            <th style={{ textAlign: 'left', paddingBottom: '10px' }}>Username</th>
-            <th style={{ textAlign: 'left', paddingBottom: '10px' }}>Blogs created</th>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Blogs created</th>
           </tr>
           {users.map(user => (
             <tr key={user.id}>
-              <td style={{ paddingTop: '10px', paddingBottom: '10px', paddingRight: '60px' }}>
+              <td>
                 <Link to={`/users/${user.id}`}>{user.name}</Link>
               </td>
-              <td style={{ paddingTop: '10px', paddingBottom: '10px', paddingRight: '60px' }}>
-                {user.username}
-              </td>
-              <td style={{ paddingTop: '10px', paddingBottom: '10px' }}>
-                {user.blogs.length}
-              </td>
+              <td>{user.username}</td>
+              <td>{user.blogs.length}</td>
             </tr>
           ))}
         </tbody>
