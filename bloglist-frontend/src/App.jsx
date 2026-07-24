@@ -3,10 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react
 import Notification from './components/Notification'
 import SingleBlog from './components/SingleBlog'
 import CreateBlog from './components/CreateBlog'
-import blogService from './services/blogs'
-import loginService from './services/login'
 import useNotificationStore from './stores/notificationStore'
 import useBlogStore from './stores/blogStore'
+import useUserStore from './stores/userStore'
 
 const Navigation = ({ user, handleLogout }) => {
   return (
@@ -24,7 +23,28 @@ const Navigation = ({ user, handleLogout }) => {
   )
 }
 
-const LoginForm = ({ handleLogin, username, setUsername, password, setPassword }) => {
+const LoginForm = () => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  const loginUser = useUserStore(state => state.loginUser)
+  const showNotification = useNotificationStore(state => state.showNotification)
+
+  const navigate = useNavigate()
+
+  const handleLogin = async (event) => {
+    event.preventDefault()
+
+    try {
+      await loginUser(username, password)
+      setUsername('')
+      setPassword('')
+      navigate('/')
+    } catch (exception) {
+      showNotification('wrong username or password', 'error')
+    }
+  }
+
   return (
     <div className="login-form">
       <h2>Log in to application</h2>
@@ -74,14 +94,13 @@ const BlogList = ({ blogs }) => {
 }
 
 const AppContent = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [user, setUser] = useState(null)
-
   const showNotification = useNotificationStore(state => state.showNotification)
   const blogs = useBlogStore(state => state.blogs)
   const initializeBlogs = useBlogStore(state => state.initializeBlogs)
   const createBlogStore = useBlogStore(state => state.createBlog)
+  const user = useUserStore(state => state.user)
+  const initializeUser = useUserStore(state => state.initializeUser)
+  const logoutUser = useUserStore(state => state.logoutUser)
 
   const navigate = useNavigate()
 
@@ -90,38 +109,11 @@ const AppContent = () => {
   }, [])
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      blogService.setToken(user.token)
-    }
+    initializeUser()
   }, [])
 
-  const handleLogin = async (event) => {
-    event.preventDefault()
-
-    try {
-      const user = await loginService.login({ username, password })
-
-      window.localStorage.setItem(
-        'loggedBlogappUser', JSON.stringify(user)
-      )
-
-      blogService.setToken(user.token)
-      setUser(user)
-      setUsername('')
-      setPassword('')
-      navigate('/')
-    } catch (exception) {
-      showNotification('wrong username or password', 'error')
-    }
-  }
-
   const handleLogout = () => {
-    window.localStorage.removeItem('loggedBlogappUser')
-    blogService.setToken(null)
-    setUser(null)
+    logoutUser()
     navigate('/')
   }
 
@@ -158,15 +150,7 @@ const AppContent = () => {
           />
           <Route
             path="/login"
-            element={
-              <LoginForm
-                handleLogin={handleLogin}
-                username={username}
-                setUsername={setUsername}
-                password={password}
-                setPassword={setPassword}
-              />
-            }
+            element={<LoginForm />}
           />
         </Routes>
       </div>
