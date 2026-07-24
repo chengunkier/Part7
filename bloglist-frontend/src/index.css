@@ -300,3 +300,30 @@ nav {
 .btn-remove:hover {
   background-color: #ffebee;
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th {
+  text-align: left;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+table td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 60px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+table a {
+  color: #1565c0;
+  text-decoration: none;
+}
+
+table a:hover {
+  text-decoration: underline;
+}

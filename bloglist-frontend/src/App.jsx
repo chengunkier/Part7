@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react
 import Notification from './components/Notification'
 import SingleBlog from './components/SingleBlog'
 import CreateBlog from './components/CreateBlog'
+import Users from './components/Users'
 import useNotificationStore from './stores/notificationStore'
 import useBlogStore from './stores/blogStore'
 import useUserStore from './stores/userStore'
@@ -14,6 +15,7 @@ const Navigation = ({ user, handleLogout }) => {
       <Link to="/" className="nav-brand">Blog App</Link>
       <div className="nav-links">
         <Link to="/">blogs</Link>
+        <Link to="/users">users</Link>
         {user && <Link to="/create">new blog</Link>}
         {user
           ? <button onClick={handleLogout}>logout</button>
@@ -137,6 +139,10 @@ const AppContent = () => {
           <Route
             path="/blogs/:id"
             element={<SingleBlog user={user} />}
+          />
+          <Route
+            path="/users"
+            element={<Users />}
           />
           <Route
             path="/create"
