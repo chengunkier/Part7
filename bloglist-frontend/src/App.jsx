@@ -4,6 +4,7 @@ import Notification from './components/Notification'
 import SingleBlog from './components/SingleBlog'
 import CreateBlog from './components/CreateBlog'
 import Users from './components/Users'
+import UserView from './components/UserView'
 import useNotificationStore from './stores/notificationStore'
 import useBlogStore from './stores/blogStore'
 import useUserStore from './stores/userStore'
@@ -143,6 +144,10 @@ const AppContent = () => {
           <Route
             path="/users"
             element={<Users />}
+          />
+          <Route
+            path="/users/:id"
+            element={<UserView />}
           />
           <Route
             path="/create"
